@@ -1,0 +1,23 @@
+{
+  "name": "flux_model_cart",
+  "version": "1.0.0",
+  "description": "Hello,",
+  "main": "control-panel.js",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack"
+  },
+  "keywords": [
+    "webpack",
+    "es6",
+    "flux"
+  ],
+  "author": "\"Rajat Kumar\"",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
+  }
+}

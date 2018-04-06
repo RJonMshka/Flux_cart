@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./shopping-cart.css" type="text/css">
+    <title>Shopping Cart</title>
+</head>
+
+<body>
+    <!-- Body Header Start-->
+    <header class="header-container" role="heading">
+        <!-- Header Heading -->
+        <section id="header-heading" class="cart-heading" role="heading">
+            <h1>YOUR SHOPPING BAG</h1>
+        </section>
+        <!-- Display Total Items -->
+        <section id="cart-items" class="cart-items">
+            <span>
+                <h3 id="item-count">0</h3>
+            </span>
+            <span>
+                <h3>ITEMS</h3>
+            </span>
+        </section>
+        <!-- Displays Price and Qunatity in Desktop View -->
+        <section class="priceAndQuantity">
+            <h3>QTY</h3>
+            <h3>PRICE ($) </h3>
+        </section>
+        <hr class="header-bar">
+    </header>
+    <!-- Body Header End -->
+
+    <!-- Main -->
+    <main role="main">
+        <!-- Item Container contains a single item's whole detail -->
+        <section class="item-container">
+            <!-- Image Container -->
+            <section class="image-container">
+                <figure>
+                    <img class="image-info" src="./assets/images/T1.jpg" alt="t-shirt">
+                </figure>
+            </section>
+            <!-- Item Details -->
+            <section class="item-details">
+                <h2>SOLID GREEN COTTON TSHIRT</h2>
+                <section class="item-info">
+                    <section class="style">
+                        <p>Style #:</p>
+                        <p class="style-number">MS1</p>
+                    </section>
+                    <div class="colour">
+                        <p>Colour:</p>
+                        <p class="color-type">Blue</p>
+                    </div>
+                    <div class="size">
+                        <p>Size:</p>
+                        <p class="size-number">S</p>
+                    </div>
+                </section>
+                <section class="quantity">
+                    <p>QTY:</p>
+                    <p class="quantity-number">1</p>
+                </section>
+                <section class="price-details">
+                    <p style="padding-top:7px">$</p>
+                    <p class="price">11.00</p>
+                </section>
+            </section>
+            <!-- Displays Price and Qunatity for Desktop View -->
+            <section class="priceAndQuantityMain">
+                <div class="quantity-desktop">
+                    <h2></h2>
+                </div>
+                <div class="price-desktop">
+                    <h2></h2>
+                </div>
+            </section>
+            <!-- Button Links -->
+            <section class="item-links">
+                <div class="edit">
+                    <button class="edit-button" type="button" role="button">Edit</button>
+                    <p>|</p>
+                </div>
+                <div class="remove">
+                    <button class="remove-button" type="button" role="button">x Remove</button>
+                    <p>|</p>
+                </div>
+                <div class="saveForLater">
+                    <button class="save-button" type="button" role="button">Save for Later</button>
+                </div>
+            </section>
+            <hr class="end-bar" role="separator">
+        </section>
+
+        <!-- Chekout Container -->
+        <section class="checkout-container">
+            <!-- Need help container for Desktop View -->
+            <aside class="help-container">
+                <p>Need Help or have questions ?</p>
+                <p>Call customer service at <a role="link" href="tel:1-800-555-5555" type="telephone">1-800-555-5555</a></p>
+                <p>
+                    <a href="#" role="link" rel="chat" type="help">Chat with one of our stylists</a>
+                </p>
+                <p>
+                    <a href="#" role="link" rel="policy" type="license">See return & exchange policy</a>
+                </p>
+            </aside>
+            <!-- Checkout Details: Promocode box, total and checkout button -->
+            <section class="checkout-detail-container">
+                <hr class="footer-bar" role="separator">
+                <p id="promo-message">ENTER PROMOTION CODE OR GIFT CARD</p>
+                <div class="promo-box">
+                    <form action="" id="promo-form" role="form">
+                        <label for="promocode"></label>
+                        <input type="text" id="promocode">
+                        <button id="apply" type="button" role="button">APPLY</button>
+                    </form>
+                </div>
+                <hr class="end-bar" role="separator">
+                <article class="estimation-details">
+                    <section class="total">
+                        <div style="width: 70%">Sub Total</div>
+                        <div style="width: 15%" id="total-cost">
+                            <p>$</p>
+                            <p id="total-cost-price">37.00</p>
+                        </div>
+                    </section>
+                    <section class="shipping">
+                        <div style="width: 70%">
+                            <p>Estimated Shipping</p>
+                            <p id="shipping-message"><small>You have spent $50, so you are qualified for Free Shipping</small></p>
+                        </div>
+                        <div id="shipping-cost" style="width: 15%">FREE</div>
+                    </section>
+                    <section class="promocode-details">
+                        <div style="width: 70%">
+                            <p>PROMOTION CODE</p>
+                            <p id="code-applied"><em>JF10 APPLIED</em></p>
+                        </div>
+                        <div style="width: 15%" id="discount-cost">
+                            <p>-$</p>
+                            <p id="discount">07.00</p>
+                        </div>
+                    </section>
+                </article>
+                <hr class="end-bar" role="separator">
+                <section id="total">
+                    <header id="total-messages" style="width: 70%">
+                        <p style="font-weight:bold">ESTIMATED TOTAL</p>
+                        <p style="color:#9a9ba0"><small>tax will be applied during checkout</small></p>
+                    </header>
+                    <div id=total-value style="width: 15%">
+                        <p style="padding-top:4px">$</p>
+                        <p id="total-amount">30.00</p>
+                    </div>
+                </section>
+                <!-- Checkout button -->
+                <div id="checkout">
+                    <button id="checkout-button" role="button" type="button">CHECKOUT</button>
+                </div>
+                <div id="continue-shopping">
+                    <a href="#" id="cont-shopping-button" role="link">Continue Shopping</a>
+                </div>
+            </section>
+            <hr class="end-bar" role="separator">
+        </section>
+
+        <!-- Modal which appears on click of Edit -->
+        <aside class="modal-container">
+            <section class="modal-contents">
+                <!-- Close Button -->
+                <header role="heading">
+                    <button class="close-button" role="button" type="button">X</button>
+                </header>
+                <div class="inner-container">
+                    <section class="detail-part">
+                        <header>
+                            <div class="modal-bar"></div>
+                            <p id="modal-item-name">SOLID GREEN COTTON TSHIRT</p>
+                        </header>
+                        <div class="modal-price-container">
+                            <div style="padding-top:13px">$</div>
+                            <div class="modal-price">11.00</div>
+                        </div>
+                        <div class="modal-color-options">
+                            <form action="" class="modal-form" role="form">
+
+                            </form>
+                        </div>
+                        <!-- Drop Downs -->
+                        <div class="drop-downs">
+                            <select name="size" id="modal-size" role="listbox">
+
+
+                            </select>
+                            <select name="quantity" id="modal-quantity" role="listbox">
+                                <option value="1" role="listitem">Qty: 1</option>
+                                <option value="2" role="listitem">Qty: 2</option>
+                                <option value="3" role="listitem">Qty: 3</option>
+                                <option value="4" role="listitem">Qty: 4</option>
+                            </select>
+                        </div>
+                        <!-- Modal Edit Button -->
+                        <div class="modal-edit-button">
+                            <button id="modal-button" role="button" type="button">EDIT</button>
+                        </div>
+                        <div class="product-details">
+                            <a href="#" role="link"><small>See Product Details</small></a>
+                        </div>
+                    </section>
+                    <!-- Image Container in Modal -->
+                    <section class="image-part">
+                        <figure role="figure">
+                            <img role="img" width="100%" height="auto" src="./assets/images/T1.jpg" alt="tshirt">
+                        </figure>
+                    </section>
+                </div>
+            </section>
+        </aside>
+    </main>
+
+    <!-- Body Footer -->
+    <footer>
+        <section>
+            <header>
+                <p id="secure-message">Secure Checkout. Shopping is always safe & secure</p>
+            </header>
+            
+            <figure role="figure" id="lock-image">
+                <img role="img" src="./assets/images/lock.jpg" alt="lock">
+            </figure>
+            <hr class="end-bar" role="separator">
+            <div class="sign-in-message">
+                <p>
+                    <a id="sign-in" href="#" role="link">SIGN IN</a> to save your cart and have access to yours items on mobile, tablet, and desktop.</p>
+            </div>
+        </section>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./main.js"></script>
+
+</body>
+
+</html>
