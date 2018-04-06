@@ -1,10 +1,17 @@
 export class Store {
     constructor(dispatcher){
         this.listeners = [];
+
+        // State of Application (DATA)
         this.state = this.getInitialState();
+
+        // Registering function with Dispatcher
         dispatcher.register(this.onDispatch.bind(this));
     }
+
     getInitialState(){
+
+        // Returns Initial Data as Whole Object
         return {  
             "productsInCart":[  
                {  
@@ -222,17 +229,27 @@ export class Store {
             ]
          };
     }
+
+    // Changes the state of Application according to Action Received
     onDispatch(action){
         switch(action.type) {
             case 'EDIT_MODAL':
+
+            // Change in State
             this.state = action.data;
+
+            // Emits Event after changes are DONE
             this.emitChange();
             break;
         }
     }
+
+    // Adding Listener
     addListener(listener){
         this.listeners.push(listener);
     }
+
+    // Execution of Listener when event is emiited
     emitChange(){
         this.listeners.forEach(listener=>listener(this.state));
     }

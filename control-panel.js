@@ -1,9 +1,12 @@
 import { Dispatcher, Store } from './flux';
 
+// Instance of Dispatcher
 const controlPanelDispatcher = new Dispatcher();
 
+// Action Type 
 export const EDIT_MODAL = 'EDIT_MODAL';
 
+// Edit Button (Modal) Action Object Creator Function
 const editModalAction = (data)=>{
     return {
         'data': data,
@@ -21,6 +24,7 @@ var emptyModal = ()=> {
     });
 }
 
+// Class VIEW to Render the Database in UI
 class View {
     constructor(){
         this.quantity = 0;
@@ -34,12 +38,26 @@ class View {
     }
 
     render(data,$container){
-        console.log('render is getting called');
+
+        // Clearing Values of quantity and total
+        this.resetValues();
+
+        // Removing clone class from the container
         $container.removeClass('clone-containers');
+
+        // Removing containers which are having class clone-containers
         $('.clone-containers').remove();
+
+        // Iterate over Each Data in ProductsInCart Array
         data.productsInCart.forEach((item,index)=>{
+
+            // Creating a Temporary Container
             let $tempContainer = $container.clone();
+
+            // Adding clone class to Cloned Container
             $tempContainer.addClass('clone-containers');
+
+            // DOM manipulations
             $tempContainer.find('.item-details').find('h2').html(`${item.p_variation} ${item.p_name}`);
             $tempContainer.find('.style-number').html(item.p_style);
             $tempContainer.find('.color-type').html(item.p_selected_color.name);
@@ -49,10 +67,12 @@ class View {
             $tempContainer.find('.quantity-desktop').find('h2').html(item.p_quantity);
             $tempContainer.find('.price-desktop').find('h2').html(`$${item.p_price * item.p_quantity}`);
             
+            // Increment Quantity variable
             this.incrementQuantity(item.p_quantity);
 
             $tempContainer.find('.image-info').attr('src', item.p_image);
 
+            // Increment Total Variable
             this.incrementTotal(item.p_price * item.p_quantity);
 
             // Attaching Event to Edit Button
@@ -61,6 +81,7 @@ class View {
                 $('.modal-container').find('#modal-item-name').html(`${item.p_variation} ${item.p_name}`);
                 $('.modal-container').find('.modal-price').html(item.p_price);
                 $('.modal-container').find('.image-part').find('img').attr('src', item.p_image);
+
                 // Adding coloured Radio Buttons
                 item.p_available_options.colors.forEach(function (color) {
                     let $label = new CreateElements().createLabel().attr('for', color.name);
@@ -69,6 +90,7 @@ class View {
                     if (color.name == item.p_selected_color.name) {
                         $input.attr('checked', true);
                     }
+                    // Appending labels and inputs
                     $label.appendTo($('.modal-container').find('.modal-color-options').find('form'));
                     $input.appendTo($('.modal-container').find('.modal-color-options').find('form'));
                 });
@@ -87,8 +109,11 @@ class View {
                     if ($(this).val() == item.p_quantity)
                         $(this).attr('selected', true);
                 });
+
                 // Attaching Event to EDIT button of Modal
                 $('#modal-button').off('click').on('click', function () {
+
+                    // Getting new values 
                     let selectedHexcode;
                     let newQuantity = $('.modal-container').find('#modal-quantity').val();
                     let newSize = $('.modal-container').find('#modal-size').val();
@@ -104,7 +129,7 @@ class View {
                                         selectedHexcode = color.hexcode;
                                     }
                                 });
-                                //    UPDATING DATA
+                                //    UPDATING DATA with new Values
                                 data.productsInCart[index].p_selected_color.name = $(this).attr('id');
                                 data.productsInCart[index].p_selected_color.hexcode = selectedHexcode;
                                 data.productsInCart[index].p_selected_size.code = newSize;
@@ -123,7 +148,6 @@ class View {
             });
 
             
-
             // MODAL CLOSE BUTTON EVENT
             $('.modal-container').find('.close-button').on('click', function () {
                 $('.modal-container').hide();
@@ -143,45 +167,58 @@ class View {
         $container.remove();
     }
 
+    // Function to calculate Discount
     calculateDiscount(){
         let discount;
+
+        // NO FREE Shipping Message
         if (this.total < 50) {
             $('#shipping-message').html('You have to spend $50 to be eligible for Free Shipping');
             $('#shipping-cost').html('PAID');
         }
 
+        // 5% Discount
         if (this.quantity == 3) {
             discount = this.total * 0.05;
             $('#code-applied').html('JF05 APPLIED');
+
+            // 10% Discount
         } else if (this.quantity > 3 && this.quantity <= 6) {
             discount = this.total * 0.1;
             $('#code-applied').html('JF10 APPLIED');
+
+            // 25% Discount
         } else if (this.quantity > 6) {
             discount = this.total * 0.25;
             $('#code-applied').html('JF25 APPLIED');
         }
         $('#discount').html(discount);
         $('#total-amount').html(this.total - discount);
+
+        // Displays Total items and total estimated price
         $('#item-count').html(this.quantity);
         $('#total-cost-price').html(this.total);
-        this.resetValues();
+
     }
 
+    // Incementing Total Quantity
     incrementQuantity(newVal){
         this.quantity += parseInt(newVal);
     }
 
+    // Incrementing Total Price
     incrementTotal(newVal){
         this.total += parseInt(newVal);
     }
 
+    // Resetting to Default Values
     resetValues() {
         this.quantity = 0;
         this.total = 0;
     }
 }
 
-
+// Class to create dynamic Elements
 class CreateElements{
     createLabel(){
         return $('<label>');
@@ -194,16 +231,22 @@ class CreateElements{
     }
 }
 
+// Instance of view Class
 var view = new View();
 
+// Instance of Store
 const cartStore = new Store(controlPanelDispatcher);
 
+// Adding Listener to Store
 cartStore.addListener((state)=>{
     console.log('render is performed');
+
+    // Re-render
     view.render(state,$('.item-container').eq(0));
     view.calculateDiscount();
 });
 
+// Initialize Function of VIEW which gets the initialState of DATA in store
 view.initialize(cartStore.getInitialState());
 
 
