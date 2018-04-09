@@ -106,8 +106,14 @@ class View {
                 });
 
                 $('#modal-quantity option').each(function () {
-                    if ($(this).val() == item.p_quantity)
-                        $(this).attr('selected', true);
+                    if ($(this).val() == item.p_quantity){
+
+                        // Make the right quantity as SELECTED
+                        $(this).attr('selected','selected');
+
+                        // Trigger a change in select option, for Selected option
+                        $('#modal-quantity').val($(this).val()).trigger('change');
+                    }
                 });
 
                 // Attaching Event to EDIT button of Modal
@@ -192,6 +198,8 @@ class View {
             discount = this.total * 0.25;
             $('#code-applied').html('JF25 APPLIED');
         }
+
+        // Reflects Total with discount And Discount in UI
         $('#discount').html(discount);
         $('#total-amount').html(this.total - discount);
 

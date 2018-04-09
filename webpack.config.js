@@ -6,16 +6,11 @@ module.exports = {
         path: __dirname,
         filename: 'main.js'
     },
-    mode:'development',
     module: {
         rules: [
             {
                 test: /\.js?/,
                  loader: 'babel-loader'
-            },
-            {
-                test:/\.html$/,
-                loader: 'html?minimize=false'
             }
         ]
     }
